@@ -1,0 +1,7 @@
+# Main dependencies, strictly necessary to make the project run. Common to all environments
+
+dj-database-url==0.5.0
+Django==3.2.6
+psycopg2-binary==2.9.1
+python-decouple==3.4
+pytz==2021.1
