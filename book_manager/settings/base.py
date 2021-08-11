@@ -26,6 +26,7 @@ INSTALLED_APPS = [
 
     "book_manager.apps.accounts",
     "book_manager.apps.core",
+    "book_manager.apps.books",
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -71,7 +72,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 # ==============================================================================
 # DATABASES SETTINGS
@@ -145,8 +145,6 @@ STATICFILES_FINDERS = (
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = BASE_DIR.parent.parent / "media"
-
-
 
 # ==============================================================================
 # THIRD-PARTY SETTINGS
