@@ -11,7 +11,7 @@ Three code environment dimensions (**modes**):
 
 Mode is described by different `settings.py`
 
-###Project naming
+### Project naming
 
 Project name: `book-manager`
 
