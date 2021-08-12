@@ -1,21 +1,26 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin, UserManager
-from django.contrib.auth.validators import UnicodeUsernameValidator
+from django.contrib.auth.validators import ASCIIUsernameValidator
+from django.contrib.postgres.fields import CICharField, CIEmailField
 from django.core.mail import send_mail
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 
-class AbstractUser(AbstractBaseUser, PermissionsMixin):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     """
-    An abstract base class implementing a fully featured User model with
+    Custom implementation of AbstractUser
+    Custom base class implementing a fully featured User model with
     admin-compliant permissions.
     Username and password are required. Other fields are optional.
+    username is only from ASCII letters
+    username is not case-sensitive
+    email is mandatory and not case-sensitive
     """
-    username_validator = UnicodeUsernameValidator()
+    username_validator = ASCIIUsernameValidator()
 
-    username = models.CharField(
+    username = CICharField(
         _('username'),
         max_length=150,
         unique=True,
@@ -27,7 +32,13 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     )
     first_name = models.CharField(_('first name'), max_length=150, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
-    email = models.EmailField(_('email address'), blank=True)
+    email = CIEmailField(
+        _("email address"),
+        unique=True,
+        error_messages={
+            "unique": _("A user with that email address already exists."),
+        },
+    )
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
@@ -52,7 +63,6 @@ class AbstractUser(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
-        abstract = True
 
     def clean(self):
         super().clean()
