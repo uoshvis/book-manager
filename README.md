@@ -48,5 +48,54 @@ After removal of the main `settigns.py` modify `manage.py`:
 ```
 
 
-****
+
 More details: [simpleisbetterthancomplex production-ready](https://simpleisbetterthancomplex.com/tutorial/2021/06/27/how-to-start-a-production-ready-django-project.html)
+
+---
+
+## Custom User Model
+
+Create ana app named acounts
+
+`django-admin startapp accounts`
+
+Create an empty migration to install Psql extensions
+
+`python manage.py makemigrations accounts --empty --name="postgres_extensions"`
+
+Modify `0001_postgres_extensions.py`:
+
+```
+from django.contrib.postgres.operations import CITextExtension
+from django.db import migrations
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+    ]
+
+    operations = [
+        CITextExtension()
+    ]
+```
+
+Grab `AbstractUser` from Django source and modify:
+- switch `username_validator` to use `ASCIIUsernameValidator`
+- The username field now is using `CICharField` which is not case-sensitive
+- The `email` field is now mandatory, unique and is using `CIEmailField` which is not case-sensitive
+
+On the settings module, add the following configuration:
+
+**settings.py**
+
+`AUTH_USER_MODEL = "accounts.CustomUser"`
+
+Apply migrations
+
+`python manage.py migrate`
+
+In db: there is no `auth_user` (default one), and now the user
+is stored on table `accounts_customuser`
+
+
+More details: [simpleisbetterthancomplex](https://simpleisbetterthancomplex.com/article/2021/07/08/what-you-should-know-about-the-django-user-model.html)
