@@ -55,7 +55,9 @@ More details: [simpleisbetterthancomplex production-ready](https://simpleisbette
 
 ## Custom User Model
 
-Create ana app named acounts
+When starting the project always replace the default User model.
+
+Create an app named `acounts`
 
 `django-admin startapp accounts`
 
