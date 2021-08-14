@@ -57,11 +57,11 @@ More details: [simpleisbetterthancomplex production-ready](https://simpleisbette
 
 When starting the project always replace the default User model.
 
-Create an app named `acounts`
+Create an app named `acounts`:
 
 `django-admin startapp accounts`
 
-Create an empty migration to install Psql extensions
+Create an empty migration to install Psql extensions:
 
 `python manage.py makemigrations accounts --empty --name="postgres_extensions"`
 
@@ -92,7 +92,7 @@ On the settings module, add the following configuration:
 
 `AUTH_USER_MODEL = "accounts.CustomUser"`
 
-Apply migrations
+Apply migrations:
 
 `python manage.py migrate`
 
@@ -111,3 +111,12 @@ The existing manager defines `create_user` and `create_superuser` methods.
 `is_staff` is required to login using django admin site
 
 `username` is required for `create_superuser`
+
+### Django forms
+
+Pre-built register form `UserCreationForm` connects to
+the pre-built model `User`.
+
+`UserCreationForm` requires only: username and password.
+
+Customization is implemented in `NewUserForm`.
