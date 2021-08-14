@@ -112,7 +112,9 @@ The existing manager defines `create_user` and `create_superuser` methods.
 
 `username` is required for `create_superuser`
 
-### Django forms
+### User Registration, Login and Logout
+
+Uses django forms
 
 Pre-built register form `UserCreationForm` connects to
 the pre-built model `User`.
@@ -120,3 +122,5 @@ the pre-built model `User`.
 `UserCreationForm` requires only: username and password.
 
 Customization is implemented in `NewUserForm`.
+
+[More details](https://www.ordinarycoders.com/blog/article/django-user-register-login-logout)
