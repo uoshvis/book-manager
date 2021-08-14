@@ -101,3 +101,13 @@ is stored on table `accounts_customuser`
 
 
 More details: [simpleisbetterthancomplex](https://simpleisbetterthancomplex.com/article/2021/07/08/what-you-should-know-about-the-django-user-model.html)
+
+
+#### UserManager definition
+
+The existing manager defines `create_user` and `create_superuser` methods.
+
+
+`is_staff` is required to login using django admin site
+
+`username` is required for `create_superuser`
