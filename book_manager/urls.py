@@ -20,6 +20,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("accounts/", include("book_manager.apps.accounts.urls")),
     path("authors/", include("book_manager.apps.books.urls")),
 ]
 
