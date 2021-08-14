@@ -2,6 +2,8 @@ from pathlib import Path
 
 import dj_database_url
 from decouple import Csv, config
+from django.contrib.messages import constants as messages
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,6 +25,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "crispy_forms",
 
     "book_manager.apps.accounts",
     "book_manager.apps.core",
@@ -161,3 +164,14 @@ MEDIA_ROOT = BASE_DIR.parent.parent / "media"
 
 
 BOOK_MANAGER_ENVIRONMENT = config("BOOK_MANAGER_ENVIRONMENT", default="local")
+
+# Sets the mapping of message level to message tag, which is typically rendered as a CSS class in HTML
+# Uses bootstrap contextual classes (e.g., .alert-success)
+
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }
